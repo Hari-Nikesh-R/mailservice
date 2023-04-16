@@ -13,6 +13,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
+import static com.example.mailservice.utils.Constants.*;
+
 @Service
 public class MailServiceImpl implements MailService {
 
@@ -32,21 +34,21 @@ public class MailServiceImpl implements MailService {
             if (Objects.nonNull(mailBody.getBcc())) {
                 simpleMailMessage.setBcc(mailBody.getBcc());
             }
-            System.out.println("-> Sending mail with info "+ simpleMailMessage);
+            System.out.println(SEND_MAIL_INFO + simpleMailMessage);
             mailSender.send(simpleMailMessage);
             trackSentEmail(simpleMailMessage);
             return true;
         }
         catch (Exception exception){
-            System.out.println("-> Error caused due to "+exception.getMessage());
+            System.out.println(ERROR_CAUSED_INFO+exception.getMessage());
             return false;
         }
     }
 
     private void trackSentEmail(SimpleMailMessage simpleMailMessage) throws IOException {
-        System.out.println("Writing file" + new File("EmailRecords.txt").getAbsoluteFile());
-        FileWriter fileWriter = new FileWriter(new File("EmailRecords.json").getAbsoluteFile());
-        System.out.println("Writing Completed "+ simpleMailMessage.toString());
+        System.out.println(WRITING_FILE + new File(FILE_NAME).getAbsoluteFile());
+        FileWriter fileWriter = new FileWriter(new File(FILE_NAME).getAbsoluteFile());
+        System.out.println(WRITING_COMPLETED + simpleMailMessage.toString());
         fileWriter.append(simpleMailMessage.getFrom()).append("\n").append(Arrays.toString(simpleMailMessage.getTo())).append("\n").append(simpleMailMessage.getSubject()).append("\n").append(simpleMailMessage.getText());
         fileWriter.append("========================\n");
         fileWriter.close();
