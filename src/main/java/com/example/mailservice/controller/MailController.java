@@ -40,7 +40,7 @@ public class MailController {
     @PostMapping(value = "/send-sms")
     public BaseResponse<?> sendSms(@RequestBody SmsBody smsBody){
         try{
-            if(smsService.sendEmail(smsBody)){
+            if(smsService.sendSms(smsBody)){
                 return new BaseResponse<>("Sms send successfully", HttpStatus.OK.value(), "", true, smsBody);
             }
             else{

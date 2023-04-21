@@ -16,7 +16,7 @@ public class SmsServiceImpl implements SmsService {
     private MailServiceProperties mailServiceProperties;
 
     @Override
-    public Boolean sendEmail(SmsBody smsBody) {
+    public Boolean sendSms(SmsBody smsBody) {
         Twilio.init(mailServiceProperties.getTwilioAuthSid(), mailServiceProperties.getTwilioAuth());
         Message.creator(new com.twilio.type.PhoneNumber(smsBody.getTo()),
                 new PhoneNumber("+16204104426"), smsBody.getBody()).create();
