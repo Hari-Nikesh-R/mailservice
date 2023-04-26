@@ -48,8 +48,7 @@ public class MailServiceImpl implements MailService {
     private void trackSentEmail(SimpleMailMessage simpleMailMessage) throws IOException {
         System.out.println(WRITING_FILE + new File(FILE_NAME).getAbsoluteFile());
         FileWriter fileWriter = new FileWriter(new File(FILE_NAME).getAbsoluteFile());
-        System.out.println(WRITING_COMPLETED + simpleMailMessage.toString());
-        fileWriter.append(simpleMailMessage.getFrom()).append("\n").append(Arrays.toString(simpleMailMessage.getTo())).append("\n").append(simpleMailMessage.getSubject()).append("\n").append(simpleMailMessage.getText());
+        fileWriter.append(simpleMailMessage.getFrom()).append("\n").append(Arrays.toString(simpleMailMessage.getTo())).append("\n").append(simpleMailMessage.getSubject()).append("\n").append(simpleMailMessage.getText()).append("\n");
         fileWriter.append("========================\n");
         fileWriter.close();
     }
